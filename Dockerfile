@@ -10,6 +10,3 @@ RUN mkdir -p /tmp/download && \
  usermod -aG staff,docker,daemon jenkins
 
 USER jenkins
-
-RUN chown jenkins:jenkins /home/jenkins/.docker -R && \
-    chmod g+rwx "$HOME/.docker" -R
