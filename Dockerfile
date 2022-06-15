@@ -11,3 +11,5 @@ RUN mkdir -p /tmp/download && \
 
 USER jenkins
 
+RUN chown "$USER":"$USER" /home/"$USER"/.docker -R && \
+    chmod g+rwx "$HOME/.docker" -R
