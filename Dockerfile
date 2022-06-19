@@ -3,8 +3,8 @@ USER root
 
 RUN apt-get update && \
     
-    apt-get install -y openjdk-8-jdk && \
-    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add && \
+    apt-get install -y openjdk-8-jdk wget && \
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add && \
     sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' && \
     apt-get install -y jenkins && \
     ca-certificates && \
