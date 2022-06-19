@@ -1,12 +1,19 @@
 FROM ubuntu:18.04
 USER root
 
-RUN apt-get install jenkins && \
- mkdir -p /tmp/download && \
- curl -L https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz | tar -xz -C /tmp/download && \
- rm -rf /tmp/download/docker/dockerd && \
- mv /tmp/download/docker/docker* /usr/local/bin/ && \
- rm -rf /tmp/download && \
+RUN sudo apt-get update && \
+    apt-get install jenkins && \
+    apt-get install && \
+    ca-certificates && \
+    curl && \
+    gnupg && \
+    lsb-release && \
+    mkdir -p /etc/apt/keyrings && \
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+  apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin && \
  groupadd -g 999 docker && \
  usermod -aG staff,docker,daemon jenkins
 
